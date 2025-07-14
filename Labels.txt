@@ -79,6 +79,7 @@ atext
 atextlegacy
 atlassiancompanion
 audacity
+audiate
 authydesktop
 autodeskfusion360admininstall
 autodmg
@@ -827,6 +828,7 @@ sonobus
 sonos
 sonoss1
 sonoss2
+soqlxplorer
 soundly
 soundly-placeit
 sourcetree
@@ -1002,6 +1004,7 @@ yubikeymanagerqt
 zappy
 zeplin
 zerotier
+zight
 zipwhip
 zohoworkdrive
 zohoworkdrivegenie
