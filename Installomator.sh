@@ -27,7 +27,7 @@ export PATH=/usr/bin:/bin:/usr/sbin:/sbin
 # also no actual installation will be performed
 # debug mode 1 will download to the directory the script is run in, but will not check the version
 # debug mode 2 will download to the temp directory, check for blocking processes, check the version, but will not install anything or remove the current version
-DEBUG=0
+DEBUG=1
 
 # notify behavior
 NOTIFY=success
@@ -349,7 +349,7 @@ if [[ $(/usr/bin/arch) == "arm64" ]]; then
     fi
 fi
 VERSION="10.9beta"
-VERSIONDATE="2025-07-14"
+VERSIONDATE="2025-07-18"
 
 # MARK: Functions
 
@@ -2372,7 +2372,7 @@ audiate)
     name="Audiate"
     type="dmg"
     downloadURL="https://cdn.cloud.techsmith.com/audiate/latest/Audiate.dmg"
-    appNewVersion=""
+    appNewVersion=$(curl -fs https://support.techsmith.com/hc/en-us/articles/360042615411-Audiate-Version-History | grep -o '<h2[^>]*>.*</h2>' | grep -E '[0-9]{4}\.[0-9]+\.[0-9]+' | grep -oE '[0-9]{4}\.[0-9]+\.[0-9]+' | head -1)
     expectedTeamID="7TQL462TU8"
     ;;
 authydesktop)
