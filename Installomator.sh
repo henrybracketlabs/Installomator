@@ -350,6 +350,7 @@ if [[ $(/usr/bin/arch) == "arm64" ]]; then
 fi
 VERSION="10.9beta"
 VERSIONDATE="2025-07-18"
+VERSIONDATE="2025-08-07"
 
 # MARK: Functions
 
@@ -2368,13 +2369,6 @@ audacity)
     appCustomVersion(){ defaults read "/Applications/Audacity.app/Contents/Info.plist" CFBundleVersion | cut -d '.' -f 1-3 }
     expectedTeamID="AWEYX923UX"
     ;;
-audiate)
-    name="Audiate"
-    type="dmg"
-    downloadURL="https://cdn.cloud.techsmith.com/audiate/latest/Audiate.dmg"
-    appNewVersion=$(curl -fs https://support.techsmith.com/hc/en-us/articles/360042615411-Audiate-Version-History | grep -o '<h2[^>]*>.*</h2>' | grep -E '[0-9]{4}\.[0-9]+\.[0-9]+' | grep -oE '[0-9]{4}\.[0-9]+\.[0-9]+' | head -1)
-    expectedTeamID="7TQL462TU8"
-    ;;
 authydesktop)
     name="Authy Desktop"
     type="dmg"
@@ -2626,29 +2620,6 @@ blender)
         downloadURL="https://ftp.nluug.nl/pub/graphics/blender/release/Blender$baseVersion/$archiveName"
     fi
     expectedTeamID="68UA947AUU"
-    ;;
-bluejeans)
-    name="BlueJeans"
-    type="pkg"
-    if [[ $(arch) == "arm64" ]]; then
-        downloadURL=$(curl -fs "https://www.bluejeans.com/downloads" | xmllint --html --format - 2>/dev/null | grep -o "https://.*BlueJeans.*Installer.*arm.*.pkg" )
-    elif [[ $(arch) == "i386" ]]; then
-        downloadURL=$(curl -fs "https://www.bluejeans.com/downloads" | xmllint --html --format - 2>/dev/null | grep -o "https://.*BlueJeansInstaller.*x86.*.dmg" | sed 's/dmg/pkg/g')
-    fi
-    appNewVersion=$(echo $downloadURL | cut -d '/' -f6)
-    expectedTeamID="HE4P42JBGN"
-    ;;
-bluejeanswithaudiodriver)
-    name="BlueJeans"
-    type="pkg"
-    if [[ $(arch) == "arm64" ]]; then
-        downloadURL=$(curl -fs "https://www.bluejeans.com/downloads" | xmllint --html --format - 2>/dev/null | grep -o "https://.*BlueJeans.*Installer.*arm.*.pkg" )
-    elif [[ $(arch) == "i386" ]]; then
-        downloadURL=$(curl -fs "https://www.bluejeans.com/downloads" | xmllint --html --format - 2>/dev/null | grep -o "https://.*BlueJeansInstaller.*x86.*.dmg" | sed 's/dmg/pkg/g')
-    fi
-    appNewVersion=$(echo $downloadURL | cut -d '/' -f6)
-    choiceChangesXML='<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><array><dict><key>attributeSetting</key><integer>1</integer><key>choiceAttribute</key><string>selected</string><key>choiceIdentifier</key><string>com.tatvikmohit.BlueJeans-Audio</string></dict></array></plist>'
-    expectedTeamID="HE4P42JBGN"
     ;;
 boop)
     name="Boop"
@@ -3510,14 +3481,6 @@ cormorant)
     downloadURL=$(curl -fs https://eclecticlight.co/downloads/ | grep -i $name | grep zip | sed -E 's/.*href=\"(https.*)\">.*/\1/g')
     appNewVersion=$(curl -fs https://eclecticlight.co/downloads/ | grep zip | grep -o -E "$name [0-9.]*" | awk '{print $2}')
     expectedTeamID="QWY4LRW926"
-    ;;
-craftmanager)
-    name="CraftManager"
-    type="zip"
-    #downloadURL="https://craft-assets.invisionapp.com/CraftManager/production/CraftManager.zip"
-    downloadURL="$(curl -fs https://craft-assets.invisionapp.com/CraftManager/production/appcast.xml | xpath '(//rss/channel/item/enclosure/@url)[1]' 2>/dev/null | head -1 | cut -d '"' -f 2)"
-    appNewVersion="$(curl -fs https://craft-assets.invisionapp.com/CraftManager/production/appcast.xml | xpath '(//rss/channel/item/enclosure/@sparkle:shortVersionString)[1]' 2>/dev/null | head -1 | cut -d '"' -f 2)"
-    expectedTeamID="VRXQSNCL5W"
     ;;
 craftmanagerforsketch)
     name="CraftManager"

@@ -112,8 +112,6 @@ bitrix24
 bitwarden
 bitwigstudio
 blender
-bluejeans
-bluejeanswithaudiodriver
 boop
 boxdrive
 boxsync
@@ -215,7 +213,6 @@ coderunner
 colourcontrastanalyser
 connectfonts
 cormorant
-craftmanager
 craftmanagerforsketch
 crashplan
 crashplansmb
