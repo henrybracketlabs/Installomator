@@ -349,7 +349,7 @@ if [[ $(/usr/bin/arch) == "arm64" ]]; then
     fi
 fi
 VERSION="10.9beta"
-VERSIONDATE="2025-12-23"
+VERSIONDATE="2026-01-05"
 
 # MARK: Functions
 
@@ -2501,7 +2501,13 @@ audacity)
     appCustomVersion(){ defaults read "/Applications/Audacity.app/Contents/Info.plist" CFBundleVersion | cut -d '.' -f 1-3 }
     expectedTeamID="AWEYX923UX"
     ;;
-autodeskfusion360admininstall)
+audiate)
+    name="Audiate"
+    type="dmg"
+    downloadURL="https://cdn.cloud.techsmith.com/audiate/latest/Audiate.dmg"
+    appNewVersion=$(curl -fs https://support.techsmith.com/hc/en-us/articles/360042615411-Audiate-Version-History | grep -o '<h2[^>]*>.*</h2>' | grep -E '[0-9]{4}\.[0-9]+\.[0-9]+' | grep -oE '[0-9]{4}\.[0-9]+\.[0-9]+' | head -1)
+    expectedTeamID="7TQL462TU8"
+    ;;autodeskfusion360admininstall)
     name="Autodesk Fusion 360 Admin Install"
     type="pkg"
     packageID="com.autodesk.edu.fusion360"
@@ -6070,7 +6076,8 @@ jetbrainsintellijidea)
         jetbrainsdistribution="macM1"
     fi
     downloadURL="https://download.jetbrains.com/product?code=${jetbrainscode}&latest&distribution=${jetbrainsdistribution}"
-    appNewVersion=$( curl -fsIL "${downloadURL}" | grep -i "location" | tail -1 | sed -E 's/.*-([0-9.]+)[-.].*/\1/g' )
+    updateData=$(curl -fsL 'https://www.jetbrains.com/updates/updates.xml')
+    appNewVersion=$( <<<"$updateData" xpath "string(//product[@name='IntelliJ IDEA']//channel[@id='IC-IU-RELEASE-licensing-RELEASE']//build[1]/@version)" )
     expectedTeamID="2ZEFAR8TH3"
     ;;
 jetbrainsintellijideace|\
@@ -9869,7 +9876,14 @@ sonoss2)
     downloadURL="https://www.sonos.com/redir/controller_software_mac2"
     expectedTeamID="2G4LW83Q3E"
     ;;
-soundly-placeit)
+soqlxplorer)
+    name="SoqlXplorer"
+    type="zip"
+    sparkleData=$(curl -fsL 'https://www.pocketsoap.com/osx/soqlx/appcast.xml')
+    appNewVersion=$( <<<"$sparkleData" xpath 'string(//item[last()]/sparkle:shortVersionString)' )
+    downloadURL=$( <<<"$sparkleData" xpath 'string(//item[last()]/enclosure/@url)' )
+    expectedTeamID="LW4LAY84H7"
+    ;;soundly-placeit)
     name="Placeit"
     # Other Tools: https://getsoundly.com/tools/
     type="pkg"
@@ -11658,7 +11672,14 @@ zerotier)
     downloadURL="https://download.zerotier.com/dist/ZeroTier%20One.pkg"
     expectedTeamID="8ZD9JUCZ4V"
     ;;
-zipwhip)
+zight)
+    name="Zight"
+    type="zip"
+    sparkleFeed=$(curl -fsL 'https://share.zight.com/api/v4/clients/mac/current-version')
+    appNewVersion="$(echo $sparkleFeed | xpath 'string(//rss/channel/item/enclosure/@sparkle:shortVersionString)' 2>/dev/null)"
+    downloadURL="$(echo $sparkleFeed | xpath 'string(//rss/channel/item/enclosure/@url)' 2>/dev/null)"
+    expectedTeamID="DCMDDJEW9X"
+    ;;zipwhip)
     name="Zipwhip"
     type="dmg"
     downloadURL="https://s3-us-west-2.amazonaws.com/zw-app-upload/mac/master/Zipwhip-latest.dmg"

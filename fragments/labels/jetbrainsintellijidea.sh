@@ -8,6 +8,7 @@ jetbrainsintellijidea)
         jetbrainsdistribution="macM1"
     fi
     downloadURL="https://download.jetbrains.com/product?code=${jetbrainscode}&latest&distribution=${jetbrainsdistribution}"
-    appNewVersion=$( curl -fsIL "${downloadURL}" | grep -i "location" | tail -1 | sed -E 's/.*-([0-9.]+)[-.].*/\1/g' )
+    updateData=$(curl -fsL 'https://www.jetbrains.com/updates/updates.xml')
+    appNewVersion=$( <<<"$updateData" xpath "string(//product[@name='IntelliJ IDEA']//channel[@id='IC-IU-RELEASE-licensing-RELEASE']//build[1]/@version)" )
     expectedTeamID="2ZEFAR8TH3"
     ;;
