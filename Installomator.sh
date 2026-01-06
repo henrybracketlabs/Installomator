@@ -8036,17 +8036,19 @@ nextcloudtalk)
 nodejs)
     name="nodejs"
     type="pkg"
-    appNewVersion=$(curl -s -L https://nodejs.org/dist/latest/ | sed -nE 's|.*>node-(.*)\.pkg</a>.*|\1|p')
-    appCustomVersion(){/usr/local/bin/node -v}
-    downloadURL="https://nodejs.org/dist/latest/node-$(curl -s -L https://nodejs.org/dist/latest/ | sed -nE 's|.*>node-(.*)\.pkg</a>.*|\1|p').pkg"
+    # Get latest version from index.json - first entry is always the latest
+    appNewVersion=$(curl -fsL "https://nodejs.org/dist/index.json" | grep -o '"version":"[^"]*"' | head -1 | sed -E 's/"version":"v([^"]+)"/\1/')
+    appCustomVersion(){ /usr/local/bin/node -v | sed 's/^v//' ; }
+    downloadURL="https://nodejs.org/dist/v${appNewVersion}/node-v${appNewVersion}.pkg"
     expectedTeamID="HX7739G8FX"
     ;;
 nodejslts)
     name="nodejs"
     type="pkg"
-    appNewVersion=$(curl -fsL https://nodejs.org/en | xmllint --html --xpath '//a[contains(text(),"LTS")]/@href' - 2>/dev/null | grep -oE 'v[0-9]+(\.[0-9]+)*' | head -1)
-    downloadURL="https://nodejs.org/dist/$appNewVersion/node-$appNewVersion.pkg"
-    appCustomVersion(){/usr/local/bin/node -v}
+    # Get latest version from index.json - first entry is always the latest
+    appNewVersion=$(curl -fsL "https://nodejs.org/dist/index.json" | grep -o '"version":"[^"]*"' | head -1 | sed -E 's/"version":"v([^"]+)"/\1/')
+    appCustomVersion(){ /usr/local/bin/node -v | sed 's/^v//' ; }
+    downloadURL="https://nodejs.org/dist/v${appNewVersion}/node-v${appNewVersion}.pkg"
     expectedTeamID="HX7739G8FX"
     ;;
 nomachine)
