@@ -92,7 +92,7 @@ atext
 atextlegacy
 atlassiancompanion
 audacity
-autodeskfusion360admininstall
+audiate
 autodmg
 automounter
 autopkgr
@@ -986,8 +986,8 @@ sonobus
 sonos
 sonoss1
 sonoss2
+soqlxplorer
 soundly
-soundly-placeit
 soundlyshapeit
 sourcetree
 spark
@@ -1200,7 +1200,7 @@ zenbrowser
 zeplin
 zerotier
 zettlr
-zipwhip
+zight
 zohoworkdrive
 zohoworkdrivegenie
 zohoworkdrivetruesync
