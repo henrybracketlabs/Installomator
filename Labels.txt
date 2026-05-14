@@ -102,6 +102,7 @@ atlassiancompanion
 audacity
 audacity3
 audacity4
+audiate
 audiopen
 autodeskfusion360admininstall
 autodmg
@@ -1092,8 +1093,8 @@ sonobus
 sonos
 sonoss1
 sonoss2
+soqlxplorer
 soundly
-soundly-placeit
 soundlyshapeit
 sourcetree
 spark
@@ -1325,6 +1326,7 @@ zenbrowser
 zeplin
 zerotier
 zettlr
+zight
 zipwhip
 zoapiclient
 zohoworkdrive
