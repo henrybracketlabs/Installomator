@@ -2640,6 +2640,13 @@ audiopen)
     fi
     expectedTeamID="WBFQ68C53U"
     ;;
+audiate)
+    name="Audiate"
+    type="dmg"
+    downloadURL="https://cdn.cloud.techsmith.com/audiate/latest/Audiate.dmg"
+    appNewVersion=$(curl -fs https://support.techsmith.com/hc/en-us/articles/360042615411-Audiate-Version-History | grep -o '<h2[^>]*>.*</h2>' | grep -E '[0-9]{4}\.[0-9]+\.[0-9]+' | grep -oE '[0-9]{4}\.[0-9]+\.[0-9]+' | head -1)
+    expectedTeamID="7TQL462TU8"
+    ;;
 autodeskfusion360admininstall)
     name="Autodesk Fusion 360 Admin Install"
     type="pkg"
@@ -7249,7 +7256,8 @@ intellijideace)
     fi
     blockingProcesses=( "idea" )
     downloadURL="https://download.jetbrains.com/product?code=${jetbrainscode}&latest&distribution=${jetbrainsdistribution}"
-    appNewVersion=$( curl -fsIL "${downloadURL}" | grep -i "location" | tail -1 | sed -E 's/.*-([0-9.]+)[-.].*/\1/g' )
+    updateData=$(curl -fsL 'https://www.jetbrains.com/updates/updates.xml')
+    appNewVersion=$( <<<"$updateData" xpath "string(//product[@name='IntelliJ IDEA']//channel[@id='IC-IU-RELEASE-licensing-RELEASE']//build[1]/@version)" )
     expectedTeamID="2ZEFAR8TH3"
     ;;
 jetbrainsphpstorm)
@@ -11666,6 +11674,14 @@ sonoss2)
     versionKey="CFBundleVersion"
     expectedTeamID="2G4LW83Q3E"
     ;;
+soqlxplorer)
+    name="SoqlXplorer"
+    type="zip"
+    sparkleData=$(curl -fsL 'https://www.pocketsoap.com/osx/soqlx/appcast.xml')
+    appNewVersion=$( <<<"$sparkleData" xpath 'string(//item[last()]/sparkle:shortVersionString)' )
+    downloadURL=$( <<<"$sparkleData" xpath 'string(//item[last()]/enclosure/@url)' )
+    expectedTeamID="LW4LAY84H7"
+    ;;
 soundly-placeit)
     name="Placeit"
     # Other Tools: https://getsoundly.com/tools/
@@ -13710,6 +13726,14 @@ zettlr)
     fi
     downloadURL="$(downloadURLFromGit Zettlr Zettlr)"
     expectedTeamID="QS52BN8W68"
+    ;;
+zight)
+    name="Zight"
+    type="zip"
+    sparkleFeed=$(curl -fsL 'https://share.zight.com/api/v4/clients/mac/current-version')
+    appNewVersion="$(echo $sparkleFeed | xpath 'string(//rss/channel/item/enclosure/@sparkle:shortVersionString)' 2>/dev/null)"
+    downloadURL="$(echo $sparkleFeed | xpath 'string(//rss/channel/item/enclosure/@url)' 2>/dev/null)"
+    expectedTeamID="DCMDDJEW9X"
     ;;
 zipwhip)
     name="Zipwhip"
