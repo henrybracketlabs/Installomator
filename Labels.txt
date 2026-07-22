@@ -93,6 +93,7 @@ atextlegacy
 atlassiancompanion
 audacity
 audiate
+autodeskfusion360admininstall
 autodmg
 automounter
 autopkgr
@@ -122,6 +123,7 @@ betterzip
 beyondcomparepro
 bezel
 bibdesk
+bitfocuscompanion
 bitrix24
 bitwarden
 bitwigstudio
@@ -988,6 +990,7 @@ sonoss1
 sonoss2
 soqlxplorer
 soundly
+soundly-placeit
 soundlyshapeit
 sourcetree
 spark
@@ -1201,6 +1204,7 @@ zeplin
 zerotier
 zettlr
 zight
+zipwhip
 zohoworkdrive
 zohoworkdrivegenie
 zohoworkdrivetruesync
