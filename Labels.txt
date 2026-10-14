@@ -268,7 +268,7 @@ code42
 codemeter
 coderunner
 codex
-colourcontrastanalyser
+codexbar
 conductor
 connectfonts
 container

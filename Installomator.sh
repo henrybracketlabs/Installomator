@@ -4095,7 +4095,13 @@ coderunner)
     appNewVersion=$(curl -fsIL ${downloadURL} | grep -i "^location" | cut -d " " -f2 | sed -E 's/.*CodeRunner-([0-9.]*).zip/\1/')
     expectedTeamID="R4GD98AJF9"
     ;;
-colourcontrastanalyser)
+codexbar)
+    name="CodexBar"
+    type="zip"
+    appNewVersion=$(versionFromGit steipete CodexBar)
+    downloadURL="https://github.com/steipete/CodexBar/releases/download/v${appNewVersion}/CodexBar-macos-universal-${appNewVersion}.zip"
+    expectedTeamID="Y5PE65HELJ"
+    ;;colourcontrastanalyser)
     name="Colour Contrast Analyser"
     type="dmg"
     downloadURL=$(downloadURLFromGit ThePacielloGroup CCAe)
