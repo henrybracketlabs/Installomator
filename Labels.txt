@@ -407,6 +407,7 @@ fathom
 favro
 fellow
 ffmpegmartinriedl
+ffprobemartinriedl
 fiddlereverywhere
 fierycommandworkstation
 figma
@@ -789,6 +790,7 @@ miniconda
 minisim
 miro
 missive
+missiveapp
 mist
 mist-cli
 mixxx
@@ -981,7 +983,6 @@ rawtherapee
 raycast
 realvncondemandassist
 realvncserver
-realvncviewer
 reaper
 rectangle
 redcanarymacmonitor
@@ -1113,6 +1114,7 @@ stackfield
 starface10x
 starface90x
 starface91x
+stats
 stats
 steelseriesengine
 steinbergactivationmanager
